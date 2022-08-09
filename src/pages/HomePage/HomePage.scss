@@ -1,0 +1,40 @@
+.container {
+  height: auto;
+  width: auto;
+  //   /* display: grid; */
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+  margin: 40px auto;
+  max-width: 1000px;
+  width: 90%;
+  max-height: 100%;
+  padding: 20px 20px;
+  border-radius: 8px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.584);
+  background-color: white;
+}
+.center {
+  text-align: center;
+}
+.link {
+  color: black;
+  background-color: red;
+}
+.text-center {
+  margin-top: 50px;
+}
+.firstCont {
+  height: auto;
+  width: auto;
+  display: flex;
+  gap: 25px;
+
+  //   margin: 40px auto;
+  max-width: 500px;
+  width: 90%;
+  max-height: 100%;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.584);
+  background-color: white;
+}
