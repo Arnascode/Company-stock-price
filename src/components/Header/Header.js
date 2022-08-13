@@ -1,3 +1,4 @@
+import { NavLink } from 'react-router-dom';
 import css from './Header.module.scss';
 
 function Header(props) {
@@ -5,7 +6,10 @@ function Header(props) {
     <header className={css.header}>
       <nav>
         <div>
-          <img className={css.img} src='../img/logo.png' alt='' srcset='' />
+          <NavLink replace to={'/'}>
+            <img className={css.img} src='../img/logo.png' alt='' srcset='' />
+          </NavLink>
+          
         </div>
       </nav>
     </header>
