@@ -60,10 +60,74 @@ function HomePage() {
     setCompany({});
   }, []);
   console.log(company, '=== posts');
+
+  // class Info extends React.Component {
+  //   constructor(props) {
+  //     super(props);
+  //     this.state = {
+  //       time: new Date(''),
+  //       low: '',
+  //       open: '',
+  //       close: '',
+  //       high: '',
+  //     };
+  //   }
+  // }
+
+  // console.log(company, '=== posts');
+  // const toString = JSON.stringify(findStock);
+  // const parsed = JSON.parse(toString);
+  // setStock(parsed);
+  // setStock(
+  //   (setState = {
+  //     time: '',
+  //     low: '',
+  //     open: '',
+  //     close: '',
+  //     high: '',
+  //   })
+  // );
+  // class Info extends setStock {
+  //   constructor(props) {
+  //     super(props);
+  //     this.state = {
+  //       time: '',
+  //       low: '',
+  //       open: '',
+  //       close: '',
+  //       high: '',
+  //     };
+  //   }
+  // }
+  // setStock({
+  //   time: parsed[0].t,
+  //   low: parsed[0].l,
+  //   open: parsed[0].o,
+  //   close: parsed[0].c,
+  //   high: parsed[0].h,
+  // });
+
+  // setStock({
+  //   time: 'new',
+  //   low: '',
+  //   open: '',
+  //   close: '',
+  //   high: '',
+  // });
+
   async function getStock() {
     const findStock = await myFetch(`${baseUrl}/company/${symbol}/${startime}/${endtime}`);
-    setStock(findStock);
-    console.log('fndstock ===', findStock);
+    const toString = JSON.stringify(findStock);
+    const parsed = JSON.parse(toString);
+
+    // setStock(parsed);
+    setStock({
+      time: parsed[0].t,
+      low: parsed[0].l,
+      open: parsed[0].o,
+      close: parsed[0].c,
+      high: parsed[0].h,
+    });
   }
   console.log('stock ===', stock);
 
@@ -78,20 +142,20 @@ function HomePage() {
     setStock({});
   }, [company]);
 
-  console.log('posts ===', stock);
+  console.log('stock ===', stock);
 
-  // stock
-  const stockToData = Object.values(stock);
+  // // stock
+  // const stockToData = Object.values(stock);
 
-  function del() {
-    stockToData.splice(4, 1).map((t) => t[0]);
-    console.log('companyToData ===', stockToData);
+  // function del() {
+  //   stockToData.splice(4, 1).map((t) => t[0]);
+  //   console.log('companyToData ===', stockToData);
 
-    return stockToData;
-  }
-  del();
-  const dataSwitch = stockToData.map((t) => t[0]);
-  console.log(dataSwitch, '=== dataSwitch ===');
+  //   return stockToData;
+  // }
+  // del();
+  // const dataSwitch = stockToData.map((t) => t[0]);
+  // console.log(dataSwitch, '=== dataSwitch ===');
 
   const data = [
     ['day', 'a', 'b', 'c', 'd'],
@@ -101,11 +165,9 @@ function HomePage() {
     ['Thu', 50, 77, 66, 77],
     ['Fri', 15, 66, 22, 68],
   ];
+
   console.log('data need to look like ===', data);
-  // open
-  //high
-  //low prices
-  //close
+
   // volume data
   // time days
   const options = {
@@ -186,14 +248,14 @@ function HomePage() {
       </div>
 
       <div className='chart'>
-        <h2>{dataSwitch}</h2>
-        <h2>{stockToData}</h2>
-        {/* <h2>{stock.h}</h2>
+        {/* <h2>{dataSwitch}</h2>
+        <h2>{stockToData}</h2> */}
+        <h2>{stock.h}</h2>
         <h2>{stock.l}</h2>
         <h2>{stock.v}</h2>
         <h2>{stock.t}</h2>
-        <h2>{stock.s}</h2> */}
-        {/* <Chart chartType='CandlestickChart' width='100%' height='400px' data={dataO} options={options} /> */}
+        <h2>{stock.s}</h2>
+        <Chart chartType='CandlestickChart' width='100%' height='400px' data={data} options={options} />
       </div>
     </div>
   );
