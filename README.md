@@ -24,12 +24,12 @@ npm Packages FE:
 
 npm Packages BE:
 
--Cors: [Npm Library](https://www.npmjs.com/package/cors)
--Dotenv: [Npm Library](https://www.npmjs.com/package/dotenv)
--Express: [Npm Library](https://www.npmjs.com/package/express)
--Finnhub: [Npm Library](https://www.npmjs.com/package/finnhub)
--Mongodb: [Npm Library](https://www.npmjs.com/package/mongodb)
--Morgan: [Npm Library](https://www.npmjs.com/package/morgan)
+- Cors: [Npm Library](https://www.npmjs.com/package/cors)
+- Dotenv: [Npm Library](https://www.npmjs.com/package/dotenv)
+- Express: [Npm Library](https://www.npmjs.com/package/express)
+- Finnhub: [Npm Library](https://www.npmjs.com/package/finnhub)
+- Mongodb: [Npm Library](https://www.npmjs.com/package/mongodb)
+- Morgan: [Npm Library](https://www.npmjs.com/package/morgan)
 
 ## HOW TO GET STARTED 🏜
 
