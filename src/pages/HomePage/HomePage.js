@@ -1,11 +1,8 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-// import Card from '../components/Card/Card';
 import { useState, useEffect } from 'react';
 import { useFormik } from 'formik';
 import toast from 'react-hot-toast';
 import * as Yup from 'yup';
 import { Chart } from 'react-google-charts';
-
 import './HomePage.scss';
 import { baseUrl, myFetch, myFetchAuth } from '../../utils';
 import Button from '../../components/UI/Button/Button';
@@ -44,11 +41,9 @@ function HomePage() {
       setSymbol(valuesCopy.symbol);
 
       const findCompany = await myFetchAuth(`${baseUrl}/company/${valuesCopy.symbol}`);
-      console.log('findCompany ===', findCompany);
+
       if (findCompany.marketCapitalization > 0) {
         setCompany(findCompany);
-      }
-      if (findCompany.marketCapitalization > 0) {
         toast.success('There is the Company');
       }
       if (findCompany.country === undefined) {
@@ -56,80 +51,23 @@ function HomePage() {
       }
     },
   });
+
   useEffect(() => {
     setCompany({});
   }, []);
-  console.log(company, '=== posts');
-
-  // class Info extends React.Component {
-  //   constructor(props) {
-  //     super(props);
-  //     this.state = {
-  //       time: new Date(''),
-  //       low: '',
-  //       open: '',
-  //       close: '',
-  //       high: '',
-  //     };
-  //   }
-  // }
-
-  // console.log(company, '=== posts');
-  // const toString = JSON.stringify(findStock);
-  // const parsed = JSON.parse(toString);
-  // setStock(parsed);
-  // setStock(
-  //   (setState = {
-  //     time: '',
-  //     low: '',
-  //     open: '',
-  //     close: '',
-  //     high: '',
-  //   })
-  // );
-  // class Info extends setStock {
-  //   constructor(props) {
-  //     super(props);
-  //     this.state = {
-  //       time: '',
-  //       low: '',
-  //       open: '',
-  //       close: '',
-  //       high: '',
-  //     };
-  //   }
-  // }
-  // setStock({
-  //   time: parsed[0].t,
-  //   low: parsed[0].l,
-  //   open: parsed[0].o,
-  //   close: parsed[0].c,
-  //   high: parsed[0].h,
-  // });
-
-  // setStock({
-  //   time: 'new',
-  //   low: '',
-  //   open: '',
-  //   close: '',
-  //   high: '',
-  // });
 
   async function getStock() {
     const findStock = await myFetch(`${baseUrl}/company/${symbol}/${startime}/${endtime}`);
-    const toString = JSON.stringify(findStock);
-    const parsed = JSON.parse(toString);
-
-    // setStock(parsed);
-    setStock({
-      time: parsed[0].t,
-      low: parsed[0].l,
-      open: parsed[0].o,
-      close: parsed[0].c,
-      high: parsed[0].h,
-    });
+    const title = [['day', 'Stock Price', '', '', '']];
+    var count = Object.keys(findStock.l).length;
+    for (let i = 0; i < count; i++) {
+      let date = new Date(findStock.t[i] * 1000);
+      let innerArray = [date, findStock.l[i], findStock.o[i], findStock.c[i], findStock.h[i]];
+      title.push(innerArray);
+    }
+    console.log('title ===', title);
+    setStock(title);
   }
-  console.log('stock ===', stock);
 
   function rightClassesForInput(field) {
     let resultClasses = 'form-control';
@@ -142,34 +80,6 @@ function HomePage() {
     setStock({});
   }, [company]);
 
-  console.log('stock ===', stock);
-
-  // // stock
-  // const stockToData = Object.values(stock);
-
-  // function del() {
-  //   stockToData.splice(4, 1).map((t) => t[0]);
-  //   console.log('companyToData ===', stockToData);
-
-  //   return stockToData;
-  // }
-  // del();
-  // const dataSwitch = stockToData.map((t) => t[0]);
-  // console.log(dataSwitch, '=== dataSwitch ===');
-
-  const data = [
-    ['day', 'a', 'b', 'c', 'd'],
-    ['Mon', 20, 28, 38, 45],
-    ['Tue', 31, 38, 55, 66],
-    ['Wed', 50, 55, 77, 80],
-    ['Thu', 50, 77, 66, 77],
-    ['Fri', 15, 66, 22, 68],
-  ];
-
-  console.log('data need to look like ===', data);
-
-  // volume data
-  // time days
   const options = {
     // Allow multiple
     // simultaneous selections.
@@ -181,6 +91,7 @@ function HomePage() {
     // by x-value.
     aggregationTarget: 'category',
   };
+  const compLength = Object.keys(company).length;
 
   return (
     <div className={'home'}>
@@ -229,34 +140,30 @@ function HomePage() {
           Search
         </Button>
       </form>
-      <div className='firstCont'>
-        <h3 onClick={getStock}>
-          {company.name} <Icon icon='fa fa-building' />
-        </h3>
-        <h3>
-          {company.country}
-          <Icon icon='fa fa-globe' />
-        </h3>
-        <h3>
-          {company.currency}
-          <Icon icon='fa fa-money ' />
-        </h3>
-        <a href={company.weburl}>
-          {company.weburl}
-          <Icon icon='fa fa-paper-plane' />
-        </a>
-      </div>
-
-      <div className='chart'>
-        {/* <h2>{dataSwitch}</h2>
-        <h2>{stockToData}</h2> */}
-        <h2>{stock.h}</h2>
-        <h2>{stock.l}</h2>
-        <h2>{stock.v}</h2>
-        <h2>{stock.t}</h2>
-        <h2>{stock.s}</h2>
-        <Chart chartType='CandlestickChart' width='100%' height='400px' data={data} options={options} />
-      </div>
+      {compLength > 0 && (
+        <div className='firstCont'>
+          <h3 onClick={getStock}>
+            {company.name} <Icon icon='fa fa-building' />
+          </h3>
+          <h3>
+            {company.country}
+            <Icon icon='fa fa-globe' />
+          </h3>
+          <h3>
+            {company.currency}
+            <Icon icon='fa fa-money' />
+          </h3>
+          <a href={company.weburl}>
+            {company.weburl}
+            <Icon icon='fa fa-paper-plane' />
+          </a>
+        </div>
+      )}
+      {stock.length > 0 && (
+        <div className='chart'>
+          <Chart chartType='CandlestickChart' width='100%' height='400px' data={stock} options={options} />
+        </div>
+      )}
     </div>
   );
 }
