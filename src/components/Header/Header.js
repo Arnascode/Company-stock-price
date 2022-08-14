@@ -1,6 +1,6 @@
 import css from './Header.module.scss';
 
-function refreshPage() {
+export function refreshPage() {
   window.location.reload();
 }
 

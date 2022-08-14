@@ -7,6 +7,7 @@ import './HomePage.scss';
 import { baseUrl, myFetch, myFetchSym } from '../../utils';
 import Button from '../../components/UI/Button/Button';
 import Icon from '../../components/UI/Icon/Icon';
+import { refreshPage } from '../../components/Header/Header';
 
 function HomePage() {
   const [symbol, setSymbol] = useState([]);
@@ -40,21 +41,22 @@ function HomePage() {
       setStartime(unixTimestampS);
       setEndtime(unixTimestampE);
       setSymbol(valuesCopy.symbol);
-      toast.loading('Wait for it...', { duration: 1400 });
+      toast.loading('Wait for it...', { duration: 1000 });
       const findCompany = await myFetchSym(`${baseUrl}/company/${valuesCopy.symbol}`);
       if (findCompany.marketCapitalization > 0) {
         setCompany(findCompany);
         toast.success('There is the Company');
       }
       if (findCompany.country === undefined) {
-        toast.error('There is no company with this symbol');
+        toast.error('There is no company with that symbol :(', { duration: 1400 });
+        setInterval(refreshPage, 1400);
       }
     },
   });
-
   useEffect(() => {
     setCompany({});
   }, []);
+
   async function getStock() {
     toast.loading('Stocks is loading...', { duration: 1400 });
     const findStock = await myFetch(`${baseUrl}/company/${symbol}/${startime}/${endtime}`);

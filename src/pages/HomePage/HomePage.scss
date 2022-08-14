@@ -67,10 +67,9 @@ $contColor: rgba(241, 238, 238, 0.893);
       }
     }
   }
-}
-
-.chart {
-  margin-left: 25px;
-  margin-right: 25px;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.584);
+  .chart {
+    margin-left: 15px;
+    margin-right: 15px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.584);
+  }
 }
