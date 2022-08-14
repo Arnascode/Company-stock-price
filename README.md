@@ -16,11 +16,11 @@ Design (responsive) was made using SCSS, react compenents, Font-Awesome 4.7.💡
 
 npm Packages FE:
 
-"react-google-charts": [Npm Library](https://www.npmjs.com/package/react-google-charts)
-"react-hot-toast": [Npm Library](https://www.npmjs.com/package/react-hot-toast)
-"react-router-dom": [Npm Library](https://www.npmjs.com/package/react-router-dom/v/5.3.0)
-"sass": [Npm Library](https://www.npmjs.com/package/sass)
-"yup": [Npm Library](https://www.npmjs.com/package/yup)
+React-google-charts: [Npm Library](https://www.npmjs.com/package/react-google-charts)
+React-hot-toast: [Npm Library](https://www.npmjs.com/package/react-hot-toast)
+React-router-dom: [Npm Library](https://www.npmjs.com/package/react-router-dom/v/5.3.0)
+Sass: [Npm Library](https://www.npmjs.com/package/sass)
+Yup: [Npm Library](https://www.npmjs.com/package/yup)
 
 npm Packages BE:
 
