@@ -1,17 +1,13 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-// import Card from '../components/Card/Card';
 import { useState, useEffect } from 'react';
 import { useFormik } from 'formik';
 import toast from 'react-hot-toast';
 import * as Yup from 'yup';
-
 import { Chart } from 'react-google-charts';
-// import css from '../css/Home.module.scss';
-// import Card from '../../components/card/Card';
-
-import css from './HomePage.scss';
-import { baseUrl, myFetchAuth } from '../../utils';
+import './HomePage.scss';
+import { baseUrl, myFetch, myFetchSym } from '../../utils';
 import Button from '../../components/UI/Button/Button';
+import Icon from '../../components/UI/Icon/Icon';
+import { refreshPage } from '../../components/Header/Header';
 
 function HomePage() {
   const [symbol, setSymbol] = useState([]);
@@ -22,61 +18,60 @@ function HomePage() {
     startime: '',
     endtime: '',
   };
-
-  // const [posts, setPosts] = useState([]);
-  const [posts, setPosts] = useState([]);
   const [stock, setStock] = useState([]);
-  console.log('posts ===', posts);
+  const [company, setCompany] = useState([]);
+
+  const compLength = Object.keys(company).length;
+
   const formik = useFormik({
     initialValues: initValues,
     validationSchema: Yup.object({
-      startime: Yup.date().required('Start date is required'),
-      endtime: Yup.date().required('End date is required'),
+      startime: Yup.date().required('Start date is required!'),
+      endtime: Yup.date().required('End date is required!'),
       symbol: Yup.string()
         .min(1, 'At least 1 characters')
         .max(35)
         .required('Required!')
         .matches(/^[aA-zZ\s]+$/, 'Only alphabets are allowed for this field '),
     }),
-
     onSubmit: async (values) => {
       const valuesCopy = { ...values };
-      const dateToS = new Date(valuesCopy.startime);
-      const dateToE = new Date(valuesCopy.endtime);
-      const unixTimestampS = Math.floor(dateToS.getTime() / 1000);
-      const unixTimestampE = Math.floor(dateToE.getTime() / 1000);
+      const unixTimestampS = Math.floor(new Date(valuesCopy.startime).getTime() / 1000);
+      const unixTimestampE = Math.floor(new Date(valuesCopy.endtime).getTime() / 1000);
       setStartime(unixTimestampS);
       setEndtime(unixTimestampE);
       setSymbol(valuesCopy.symbol);
-
-      const findCompany = await myFetchAuth(`${baseUrl}/company/${valuesCopy.symbol}`);
-      console.log('findCompany ===', findCompany);
+      toast.loading('Wait for it...', { duration: 1000 });
+      const findCompany = await myFetchSym(`${baseUrl}/company/${valuesCopy.symbol}`);
       if (findCompany.marketCapitalization > 0) {
-        // setPosts(JSON.stringify(findCompany));
-        setPosts(findCompany);
-      }
-      if (findCompany.marketCapitalization > 0) {
+        setCompany(findCompany);
         toast.success('There is the Company');
       }
       if (findCompany.country === undefined) {
-        toast.error('there is no company with that symbol');
+        toast.error('There is no company with that symbol :(', { duration: 1400 });
+        setInterval(refreshPage, 1400);
       }
     },
   });
-
   useEffect(() => {
-    setPosts({});
+    setCompany({});
   }, []);
 
   async function getStock() {
-    const findStock = await myFetchAuth(`${baseUrl}/company/${symbol}/${startime}/${endtime}`);
-    setStock(findStock);
+    toast.loading('Stocks is loading...', { duration: 1400 });
+    const findStock = await myFetch(`${baseUrl}/company/${symbol}/${startime}/${endtime}`);
+    const title = [['day', 'Stock Price', '', '', '']];
+    var count = Object.keys(findStock.l).length;
+    for (let i = 0; i < count; i++) {
+      let date = new Date(findStock.t[i] * 1000);
+      let innerArray = [date, findStock.l[i], findStock.o[i], findStock.c[i], findStock.h[i]];
+      title.push(innerArray);
+    }
+    setStock(title);
   }
-  // console.log('getStock() =>', getStock);
-  // useEffect(() => {
-  //   setStock({});
-  // }, []);
-
+  useEffect(() => {
+    setStock({});
+  }, [company]);
   function rightClassesForInput(field) {
     let resultClasses = 'form-control';
     if (formik.touched[field]) {
@@ -84,55 +79,24 @@ function HomePage() {
     }
     return resultClasses;
   }
+  const options = {
+    selectionMode: 'multiple',
+    tooltip: { trigger: 'selection' },
+    colors: ['rgb(41, 64, 165)'],
+    backgroundColor: {
+      fill: 'rgb(241, 238, 238)',
+      opacity: 50,
+    },
+    aggregationTarget: 'category',
+  };
 
-  // const dataO = {
-  //   o: [35.59, 34.97, 35.03, 34.4, 34.63, 34.88],
-  //   h: [35.66, 35.48, 35.03, 35.35, 35.21, 35.35],
-  //   l: [34.505, 34.5, 33.97, 34.29, 34.39, 34.4],
-  //   c: [35.12, 34.77, 34.46, 34.96, 34.49, 34.4],
-  //   v: [1575836, 1263832, 1108162, 1037126, 829151, 750651],
-  //   t: [1659312000, 1659398400, 1659484800, 1659571200, 1659657600, 1659916800],
-  //   s: 'ok',
-  // };
-  // console.log(posts);
-  // const data = [
-  //   ['day', 'a', 'b', 'c', 'd'],
-  //   ['Mon', 20, 28, 38, 45],
-  //   ['Tue', 31, 38, 55, 66],
-  //   ['Wed', 50, 55, 77, 80],
-  //   ['Thu', 50, 77, 66, 77],
-  //   ['Fri', 15, 66, 22, 68],
-  // ];
-  // open
-  //high
-  //low prices
-  //close
-  // volume data
-  // time days
-  // const options = {
-  //   // Allow multiple
-  //   // simultaneous selections.
-  //   selectionMode: 'multiple',
-  //   // Trigger tooltips
-  //   // on selections.
-  //   tooltip: { trigger: 'selection' },
-  //   // Group selections
-  //   // by x-value.
-  //   aggregationTarget: 'category',
-  // };
-  // const postsSt = JSON.stringify(posts);
-  // console.log(postsSt, '=== stringify');
-  // const stockSt = JSON.stringify(stock);
-  // console.log(stockSt, '=== stringify');
-  // const time = stock.t.split(' 0');
-  // console.log(time);
   return (
-    <div className={css.center}>
-      <h1 className='text-center'>Search Company</h1>
-      <form onSubmit={formik.handleSubmit} className={css.container}>
-        <div className='invalid-feedback'>{formik.errors.symbol}</div>
+    <div className={'home'}>
+      <h1 className='text-center'>Welcome to Finhub API Companys Stock Price</h1>
+      <form onSubmit={formik.handleSubmit} className={'container'}>
         <div className='form-group'>
-          <label htmlFor='symbol'>Symbol: </label>
+          <div className='invalid-feedback'>{formik.errors.symbol}</div>
+          <label htmlFor='symbol'>Company Symbol: </label>
           <input
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
@@ -144,7 +108,8 @@ function HomePage() {
           />
         </div>
         <div className='form-group'>
-          <label htmlFor='startime'>start time: </label>
+          <div className='invalid-feedback'>{formik.errors.startime}</div>
+          <label htmlFor='startime'>Start time: </label>
           <input
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
@@ -155,9 +120,9 @@ function HomePage() {
             name='startime'
           />
         </div>
-        <div className='invalid-feedback'>{formik.errors.startime}</div>
         <div className='form-group'>
-          <label htmlFor='endtime'>end time: </label>
+          <div className='invalid-feedback'>{formik.errors.endtime}</div>
+          <label htmlFor='endtime'>End time: </label>
           <input
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
@@ -167,28 +132,35 @@ function HomePage() {
             id='andtime'
             name='endtime'
           />
-          <div className='invalid-feedback'>{formik.errors.endtime}</div>
         </div>
-        <Button submit primary>
+        <Button secondary submit>
           Search
         </Button>
       </form>
-      <div className='firstCont'>
-        <h2 onClick={getStock}>{posts.name}</h2>
-        <h3>{posts.country}</h3>
-        <h4>{posts.currency}</h4>
-        <a href={posts.weburl}>{posts.weburl}</a>
-      </div>
-
-      <div className='chart'>
-        <h2>{stock.o}</h2>
-        <h2>{stock.h}</h2>
-        <h2>{stock.l}</h2>
-        <h2>{stock.v}</h2>
-        <h2>{stock.t}</h2>
-        <h2>{stock.s}</h2>
-        {/* <Chart chartType='CandlestickChart' width='100%' height='400px' data={dataO} options={options} /> */}
-      </div>
+      {compLength > 0 && (
+        <div className='firstCont'>
+          <h3 onClick={getStock}>
+            {company.name} <Icon icon='fa fa-building' />
+          </h3>
+          <h3>
+            {company.country}
+            <Icon icon='fa fa-globe' />
+          </h3>
+          <h3>
+            {company.currency}
+            <Icon icon='fa fa-money' />
+          </h3>
+          <a href={company.weburl}>
+            {company.weburl}
+            <Icon icon='fa fa-paper-plane' />
+          </a>
+        </div>
+      )}
+      {stock.length > 0 && (
+        <div className='chart'>
+          <Chart chartType='CandlestickChart' width='100%' height='400px' data={stock} options={options} />
+        </div>
+      )}
     </div>
   );
 }

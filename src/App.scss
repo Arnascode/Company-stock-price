@@ -1,3 +1,7 @@
+$bodyCl: rgb(126, 120, 120);
 body {
-  background-color: rgb(126, 120, 120);
+  background-color: $bodyCl;
+}
+* {
+  font-family: 'Goudy Bookletter 1911', sans-serif;
 }
