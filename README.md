@@ -1,6 +1,6 @@
-# Project Title 🛰
+# Project Title
 
-The Finhub API Companys Stock Price
+The Finhub API Companys Stock Price web page
 
 # Main features
 
@@ -12,7 +12,24 @@ This is an application that allows you to find company and their stock informati
 
 The project has been made using React Js (CreateReactApp) for FE and Node Js (MongoDb) for BE.💡
 
-Design (responsive) was made using SCSS , react compenents, Font-Awesome 4.7.💡
+Design (responsive) was made using SCSS, react compenents, Font-Awesome 4.7.💡
+
+npm Packages FE:
+
+"react-google-charts": [Npm Library](https://www.npmjs.com/package/react-google-charts)
+"react-hot-toast": [Npm Library](https://www.npmjs.com/package/react-hot-toast)
+"react-router-dom": [Npm Library](https://www.npmjs.com/package/react-router-dom/v/5.3.0)
+"sass": [Npm Library](https://www.npmjs.com/package/sass)
+"yup": [Npm Library](https://www.npmjs.com/package/yup)
+
+npm Packages BE:
+
+"cors": [Npm Library](https://www.npmjs.com/package/cors)
+"dotenv": [Npm Library](https://www.npmjs.com/package/dotenv)
+"express": [Npm Library](https://www.npmjs.com/package/express)
+"finnhub": [Npm Library](https://www.npmjs.com/package/finnhub)
+"mongodb": [Npm Library](https://www.npmjs.com/package/mongodb)
+"morgan": [Npm Library](https://www.npmjs.com/package/morgan)
 
 ## HOW TO GET STARTED 🏜
 
@@ -51,13 +68,9 @@ If the window in your browser doesn't open, there is url to paste into the brows
 
 ## Enjoy the program! :checkered_flag:
 
-## Help :exclamation::exclamation:
+## Help :exclamation:
 
 If you have any further issues, feel free to ask author for help.
-
-```
-help
-```
 
 ## The Author
 
