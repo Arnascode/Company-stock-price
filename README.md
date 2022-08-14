@@ -16,20 +16,20 @@ Design (responsive) was made using SCSS, react compenents, Font-Awesome 4.7.💡
 
 npm Packages FE:
 
-React-google-charts: [Npm Library](https://www.npmjs.com/package/react-google-charts).
-React-hot-toast: [Npm Library](https://www.npmjs.com/package/react-hot-toast).
-React-router-dom: [Npm Library](https://www.npmjs.com/package/react-router-dom/v/5.3.0).
-Sass: [Npm Library](https://www.npmjs.com/package/sass).
-Yup: [Npm Library](https://www.npmjs.com/package/yup).
+- React-google-charts: [Npm Library](https://www.npmjs.com/package/react-google-charts)
+- React-hot-toast: [Npm Library](https://www.npmjs.com/package/react-hot-toast)
+- React-router-dom: [Npm Library](https://www.npmjs.com/package/react-router-dom/v/5.3.0)
+- Sass: [Npm Library](https://www.npmjs.com/package/sass)
+- Yup: [Npm Library](https://www.npmjs.com/package/yup)
 
 npm Packages BE:
 
-"cors": [Npm Library](https://www.npmjs.com/package/cors)
-"dotenv": [Npm Library](https://www.npmjs.com/package/dotenv)
-"express": [Npm Library](https://www.npmjs.com/package/express)
-"finnhub": [Npm Library](https://www.npmjs.com/package/finnhub)
-"mongodb": [Npm Library](https://www.npmjs.com/package/mongodb)
-"morgan": [Npm Library](https://www.npmjs.com/package/morgan)
+-Cors: [Npm Library](https://www.npmjs.com/package/cors)
+-Dotenv: [Npm Library](https://www.npmjs.com/package/dotenv)
+-Express: [Npm Library](https://www.npmjs.com/package/express)
+-Finnhub: [Npm Library](https://www.npmjs.com/package/finnhub)
+-Mongodb: [Npm Library](https://www.npmjs.com/package/mongodb)
+-Morgan: [Npm Library](https://www.npmjs.com/package/morgan)
 
 ## HOW TO GET STARTED 🏜
 
