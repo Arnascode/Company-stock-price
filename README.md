@@ -1,70 +1,77 @@
-# Getting Started with Create React App
+# Project Title
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The Finhub API Companys Stock Price web page
 
-## Available Scripts
+# Main features
 
-to do readme
+- Home page - Find company by their symbol and check their stock price by time from finnhub API
 
-### `npm start`
+## Short Description 📃
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+This is an application that allows you to find company and their stock information. The content is available for all 🔐.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+The project has been made using React Js (CreateReactApp) for FE and Node Js (MongoDb) for BE.💡
 
-### `npm test`
+Design (responsive) was made using SCSS, react compenents, Font-Awesome 4.7.💡
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+npm Packages FE:
 
-### `npm run build`
+- React-google-charts: [Npm Library](https://www.npmjs.com/package/react-google-charts)
+- React-hot-toast: [Npm Library](https://www.npmjs.com/package/react-hot-toast)
+- React-router-dom: [Npm Library](https://www.npmjs.com/package/react-router-dom/v/5.3.0)
+- Sass: [Npm Library](https://www.npmjs.com/package/sass)
+- Yup: [Npm Library](https://www.npmjs.com/package/yup)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+npm Packages BE:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- Cors: [Npm Library](https://www.npmjs.com/package/cors)
+- Dotenv: [Npm Library](https://www.npmjs.com/package/dotenv)
+- Express: [Npm Library](https://www.npmjs.com/package/express)
+- Finnhub: [Npm Library](https://www.npmjs.com/package/finnhub)
+- Mongodb: [Npm Library](https://www.npmjs.com/package/mongodb)
+- Morgan: [Npm Library](https://www.npmjs.com/package/morgan)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## HOW TO GET STARTED 🏜
 
-### `npm run eject`
+- To run this project, clone this repository (click the green "Code" button on the top right corner and use the SSH or HTTPS link) OR press Download ZIP and open the downloaded files with the code editor of your choice
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- Rename both .env.example files to .env
+- one in root, second in imb-back folder
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Do the following commands to start Back-End and Front-End 💂‍♀️
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- FRONT-END (run commands in the terminal)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```
+npm install
+```
 
-## Learn More
+```
+npm start
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- BACK-END (open new terminal)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```
+cd imb-back
+```
 
-### Code Splitting
+```
+npm install
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```
+npm start
+```
 
-### Analyzing the Bundle Size
+If the window in your browser doesn't open, there is url to paste into the browser http://localhost:3000 🏌️‍♂️
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Enjoy the program! :checkered_flag:
 
-### Making a Progressive Web App
+## Help :exclamation:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+If you have any further issues, feel free to ask author for help.
 
-### Advanced Configuration
+## The Author
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Arnas Vilkoncius

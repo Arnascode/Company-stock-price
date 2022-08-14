@@ -58,7 +58,7 @@ function HomePage() {
   }, []);
 
   async function getStock() {
-    toast.loading('Stocks is loading...', { duration: 1400 });
+    toast.loading('Stocks is loading...', { duration: 1000 });
     const findStock = await myFetch(`${baseUrl}/company/${symbol}/${startime}/${endtime}`);
     const title = [['day', 'Stock Price', '', '', '']];
     var count = Object.keys(findStock.l).length;
