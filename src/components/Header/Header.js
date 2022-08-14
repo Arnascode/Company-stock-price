@@ -1,15 +1,15 @@
-import { NavLink } from 'react-router-dom';
 import css from './Header.module.scss';
+
+function refreshPage() {
+  window.location.reload();
+}
 
 function Header(props) {
   return (
     <header className={css.header}>
       <nav>
         <div>
-          <NavLink replace to={'/'}>
-            <img className={css.img} src='../img/logo.png' alt='' srcset='' />
-          </NavLink>
-          
+          <img onClick={refreshPage} className={css.img} src='../img/logo.png' alt='' srcset='' />
         </div>
       </nav>
     </header>

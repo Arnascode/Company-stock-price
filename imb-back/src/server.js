@@ -6,7 +6,6 @@ const { PORT } = require('./config');
 
 const app = express();
 
-// app.use(express.urlencoded({ extended: true }));
 // Global MiddleWare
 app.use(morgan('dev'));
 app.use(cors());

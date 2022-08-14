@@ -4,7 +4,7 @@ import toast from 'react-hot-toast';
 import * as Yup from 'yup';
 import { Chart } from 'react-google-charts';
 import './HomePage.scss';
-import { baseUrl, myFetch, myFetchAuth } from '../../utils';
+import { baseUrl, myFetch, myFetchSym } from '../../utils';
 import Button from '../../components/UI/Button/Button';
 import Icon from '../../components/UI/Icon/Icon';
 
@@ -17,9 +17,10 @@ function HomePage() {
     startime: '',
     endtime: '',
   };
-
-  const [company, setCompany] = useState([]);
   const [stock, setStock] = useState([]);
+  const [company, setCompany] = useState([]);
+
+  const compLength = Object.keys(company).length;
 
   const formik = useFormik({
     initialValues: initValues,
@@ -39,15 +40,14 @@ function HomePage() {
       setStartime(unixTimestampS);
       setEndtime(unixTimestampE);
       setSymbol(valuesCopy.symbol);
-
-      const findCompany = await myFetchAuth(`${baseUrl}/company/${valuesCopy.symbol}`);
-
+      toast.loading('Wait for it...', { duration: 1400 });
+      const findCompany = await myFetchSym(`${baseUrl}/company/${valuesCopy.symbol}`);
       if (findCompany.marketCapitalization > 0) {
         setCompany(findCompany);
         toast.success('There is the Company');
       }
       if (findCompany.country === undefined) {
-        toast.error('there is no company with that symbol');
+        toast.error('There is no company with this symbol');
       }
     },
   });
@@ -55,8 +55,8 @@ function HomePage() {
   useEffect(() => {
     setCompany({});
   }, []);
-
   async function getStock() {
+    toast.loading('Stocks is loading...', { duration: 1400 });
     const findStock = await myFetch(`${baseUrl}/company/${symbol}/${startime}/${endtime}`);
     const title = [['day', 'Stock Price', '', '', '']];
     var count = Object.keys(findStock.l).length;
@@ -65,10 +65,11 @@ function HomePage() {
       let innerArray = [date, findStock.l[i], findStock.o[i], findStock.c[i], findStock.h[i]];
       title.push(innerArray);
     }
-    console.log('title ===', title);
     setStock(title);
   }
-
+  useEffect(() => {
+    setStock({});
+  }, [company]);
   function rightClassesForInput(field) {
     let resultClasses = 'form-control';
     if (formik.touched[field]) {
@@ -76,22 +77,16 @@ function HomePage() {
     }
     return resultClasses;
   }
-  useEffect(() => {
-    setStock({});
-  }, [company]);
-
   const options = {
-    // Allow multiple
-    // simultaneous selections.
     selectionMode: 'multiple',
-    // Trigger tooltips
-    // on selections.
     tooltip: { trigger: 'selection' },
-    // Group selections
-    // by x-value.
+    colors: ['rgb(41, 64, 165)'],
+    backgroundColor: {
+      fill: 'rgb(241, 238, 238)',
+      opacity: 50,
+    },
     aggregationTarget: 'category',
   };
-  const compLength = Object.keys(company).length;
 
   return (
     <div className={'home'}>
